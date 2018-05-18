@@ -6,15 +6,20 @@ def load_words():
     Depending on the size of the word list, this function may
     take a while to finish.
     """
-    wordlist_file = "palavras.txt"
-    print 'Loading word list from file...'
+    WORDLIST_FILE = "palavras.txt"
+    print '\nLoading word list from file...\n'
     # in_file: file
-    in_file = open(wordlist_file, 'r', 0)
+    in_file = open(WORDLIST_FILE, 'r', 0)
     # line: string
     line = in_file.readline()
     # wordlist: list of strings
     wordlist = string.split(line)
-    print '  ', len(wordlist), 'words loaded.\n'
+
+    if len(wordlist) == 0:
+        print 'File empty!\nBe sure that your word file is not empty!\n'
+        exit(0)
+
+    print '    ', len(wordlist), 'words loaded.\n'
     return random.choice(wordlist)
 
 def is_word_guessed(secret_word, letters_guessed):
