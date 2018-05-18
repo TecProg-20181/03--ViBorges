@@ -14,13 +14,16 @@ def load_words():
     line = in_file.readline()
     # wordlist: list of strings
     wordlist = string.split(line)
+    #checks if file is empty of words
+    is_wordlist_empty(wordlist)
+    print '    ', len(wordlist), 'words loaded.\n'
 
+    return random.choice(wordlist)
+
+def is_wordlist_empty(wordlist):
     if len(wordlist) == 0:
         print 'File empty!\nBe sure that your word file is not empty!\n'
         exit(0)
-
-    print '    ', len(wordlist), 'words loaded.\n'
-    return random.choice(wordlist)
 
 def is_word_guessed(secret_word, letters_guessed):
 
@@ -45,6 +48,10 @@ def guessed_word(letters_guessed):
 def available_letters(letters_guessed):
     # 'abcdefghijklmnopqrstuvwxyz'
     is_available = string.ascii_lowercase
+    #checks if is_available has the correct letter format
+    #otherwise it throws an AssertionError
+    if not is_available == 'abcdefghijklmnopqrstuvwxyz':
+        raise AssertionError()
 
     for letter in is_available:
         if letter in letters_guessed:
